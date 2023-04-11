@@ -24,7 +24,6 @@ class ProductController extends Controller
 
         ]);
         Excel::import(new ImportProduct($request->merchant), $request->file('file')->store('files'));
-        // Excel::import(new ImportProduct, $request->file('file')->store('files'));
         return redirect()->back();
     }
 }

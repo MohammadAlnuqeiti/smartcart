@@ -396,6 +396,12 @@
                             <div class="nav-item " id="walkthrough-pages">
                                 <a href="https://demo.smartcart.shopping/en/admin/walkthrough"><i class="fas fa-paste"></i><span>Walkthrough Pages</span></a>
                             </div>
+                            <div class="nav-item " id="walkthrough-pages">
+                                <a href="{{Route('products')}}"><i class="fas fa-paste"></i><span>All products</span></a>
+                            </div>
+                            <div class="nav-item " id="walkthrough-pages">
+                                <a href="{{Route('import-view')}}"><i class="fas fa-paste"></i><span>Import product</span></a>
+                            </div>
                         </nav>
                     </div>
                 </div>

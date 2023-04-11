@@ -9,14 +9,14 @@
 @section('content')
 <div class="container mt-5 text-center">
     <h2 class="mb-4">
-       Import  Excel
+       Import Products Using Excel File
     </h2>
     @if (isset($errors) && $errors->any())
 
         <div class="alert">
-            {{-- @foreach ($errors->all() as $error)
+            @foreach ($errors->all() as $error)
                 {{$error}}
-            @endforeach --}}
+            @endforeach
         </div>
 
     @endif

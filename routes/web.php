@@ -25,4 +25,3 @@ Route::get('/products', function () {
 
 Route::get('/file-import',[ProductController::class,'importView'])->name('import-view');
 Route::post('/import',[ProductController::class,'import'])->name('import');
-// Route::get('/export-users',[ProductController::class,'exportUsers'])->name('export-users');
