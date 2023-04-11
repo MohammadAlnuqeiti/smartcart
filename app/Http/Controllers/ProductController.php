@@ -19,6 +19,10 @@ class ProductController extends Controller
 
     public function import(Request $request){
 
+        $request->validate([
+            'file' => ['required','mimes:xlsx,xlx,csv','max:511998'],
+
+        ]);
         Excel::import(new ImportProduct($request->merchant), $request->file('file')->store('files'));
         // Excel::import(new ImportProduct, $request->file('file')->store('files'));
         return redirect()->back();

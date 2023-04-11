@@ -9,30 +9,38 @@
 @section('content')
 <div class="container mt-5 text-center">
     <h2 class="mb-4">
-        Laravel 9 Import Export Excel
+       Import  Excel
     </h2>
     @if (isset($errors) && $errors->any())
-    <div class="alert">
-        @foreach ($errors->all() as $error)
-{{$error}}
-        @endforeach
-    </div>
+
+        <div class="alert">
+            {{-- @foreach ($errors->all() as $error)
+                {{$error}}
+            @endforeach --}}
+        </div>
 
     @endif
     <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group mb-4">
-            <div class="custom-file text-left">
-                <label for="exampleSelectRounded0">Merchants <code></code></label>
 
-                <select class="custom-select rounded-0" name="merchant">
-        
-                    @foreach ($merchants as $merchant)
+            <select class="custom-select rounded-0" name="merchant">
+
+                @foreach ($merchants as $merchant)
                     <option value="{{$merchant->id}}">{{$merchant->name}}</option>
-                    @endforeach
-                </select>
-                <input type="file" name="file" class="custom-file-input" id="customFile">
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group mb-4">
+
+            <div class="custom-file text-left">
+
+                <input type="file" name="file" class="custom-file-input" id="customFile" class="@error('file') is-invalid @enderror">
                 <label class="custom-file-label" for="customFile">Choose file</label>
+                @error('file')
+                <div class="error">{{ $message }}</div>
+               @enderror
+
             </div>
         </div>
         <button class="btn btn-primary">Import Users</button>

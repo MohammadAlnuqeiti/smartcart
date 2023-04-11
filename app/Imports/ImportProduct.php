@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Validators\Failure;
 
 class ImportProduct implements ToModel ,
-WithHeadingRow ,
+// WithHeadingRow ,
 SkipsEmptyRows,
 WithValidation ,
 SkipsOnFailure ,
@@ -35,18 +35,17 @@ WithChunkReading
     {
 
 
-        // dd($row);
-        $data = Product::where('product_number',$row['number'])->where('merchant_id',$this->merchant)->first();
+        $data = Product::where('product_number',$row[0])->where('merchant_id',$this->merchant)->first();
         if($data){
-            $data->price=$row['price'];
+            $data->price=$row[3];
             $data->save();
         }else{
 
             return new Product([
-                'product_number' => trim($row['number']),
-                'product_name' => trim($row['name']),
-                'product_descount' => trim($row['discount'],"%"),
-                'price' => trim($row['price']),
+                'product_number' => trim($row[0]),
+                'product_name' => trim($row[1]),
+                'product_descount' =>  trim($row[2]),
+                'price' => trim($row[3]),
                 'merchant_id' =>$this->merchant,
             ]);
         }
@@ -57,7 +56,10 @@ WithChunkReading
     {
         return [
              // Above is alias for as it always validates in batches
-             'price' => ['numeric' , 'not_in:0'],
+             '0' => ['required'],
+             '1' => ['required'],
+             '2' => ['required'],
+             '3' => ['required','numeric' , 'not_in:0'],
         ];
     }
     public function onFailure(Failure ...$failures)
