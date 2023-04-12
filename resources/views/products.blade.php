@@ -36,6 +36,7 @@
 @endsection
 @section('content')
 <h1>All Products</h1>
+<!-- please use https://datatables.net/ to view tables -->
 <table id="customers">
     <tr>
       <th>Product Number</th>
