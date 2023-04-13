@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="https://demo.smartcart.shopping/dist/css/theme.min.css">
     <link rel="stylesheet" href="https://demo.smartcart.shopping/css/style.css">
     <script src="https://demo.smartcart.shopping/src/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     @yield('css')
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -195,6 +196,9 @@
         </div>
     </div>
 
+    <script src="{{URL::asset('https://demo.smartcart.shopping/main/js/main.js')}}"></script>
+
+@yield('script')
     <!-- initiate scripts-->
     <script src="https://demo.smartcart.shopping/src/js/vendor/jquery-3.4.1.min.js"></script>
     <script src="https://demo.smartcart.shopping/plugins/popper.js/dist/umd/popper.min.js"></script>

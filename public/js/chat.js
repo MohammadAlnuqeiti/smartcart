@@ -42,3 +42,5 @@
         el.find('.panel-body').removeClass('hide');
     });
 }(window, document, jQuery);
+
+

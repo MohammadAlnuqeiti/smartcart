@@ -15,7 +15,7 @@ use Maatwebsite\Excel\Validators\Failure;
 
 //heading row not handled please refer to the link:- https://docs.laravel-excel.com/3.1/imports/heading-row.html
 class ImportProduct implements ToModel ,
-// WithHeadingRow ,
+WithHeadingRow ,
 SkipsEmptyRows,
 WithValidation ,
 SkipsOnFailure ,
@@ -37,16 +37,18 @@ WithChunkReading
     {
 
 
-        $data = Product::where('product_number',$row[0])->where('merchant_id',$this->merchant)->first();
+        $data = Product::where('product_number',$row['number'])->where('merchant_id',$this->merchant)->first();
         if($data){
-            //will update all existing products in excel sheet need to preform update only if the price is changed.
-            $data->price=$row[3];
-            $data->save();
+            if($data->price != $row['price']){
+                //will update all existing products in excel sheet need to preform update only if the price is changed.
+                $data->price=$row['price'];
+                $data->save();
+            }
         }else{
-			
+
 			/*
 			sample code of creating new product
-			
+
 			$product = new Product();
 			$product->is_active = false;
 			$product->is_featuer = false;
@@ -61,16 +63,16 @@ WithChunkReading
                     $product->save();
                 }
             }
-			
-			
+
+
 			*/
 
             return new Product([
-                'product_number' => trim($row[0]),
+                'product_number' => trim($row['number']),
                 //product name is a translated field and translated name exists on other table please review DB structure.
-                'product_name' => trim($row[1]),
-                'product_descount' =>  trim($row[2]),
-                'price' => trim($row[3]),
+                'product_name' => trim($row['name']),
+                'product_descount' =>  trim($row['discount']),
+                'price' => trim($row['price']),
                 'merchant_id' =>$this->merchant,
             ]);
         }
@@ -81,17 +83,21 @@ WithChunkReading
     {
         return [
              // Above is alias for as it always validates in batches
-             '0' => ['required'],
+             'number' => ['required'],
             // item name must be at least 3 characters
-             '1' => ['required'],
-             '2' => ['required'],
+             'name' => ['required','min:3'],
+             'discount' => ['required'],
             // add additional validation price should be less than 100
-             '3' => ['required','numeric' , 'not_in:0'],
+             'price' => ['required','numeric' , 'not_in:0', 'lt:100'],
         ];
     }
     public function onFailure(Failure ...$failures)
     {
         // Handle the failures how you'd like.
+    }
+    public function headingRow(): int
+    {
+        return 9;
     }
     //للتحكم بعدد الادخالات في كل دفعة اذا كانت حجم البيانات كبير جدا مما يوفر استهلاك الذاكرة
     public function batchSize(): int

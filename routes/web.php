@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ViewProductController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::get('/products', function () {
 
 Route::get('/file-import',[ProductController::class,'importView'])->name('import-view');
 Route::post('/import',[ProductController::class,'import'])->name('import');
+Route::get('/Allproduct',[ViewProductController::class,'index'])->name('Allproducts');
