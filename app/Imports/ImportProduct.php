@@ -83,15 +83,6 @@ WithChunkReading
             $product->translateOrNew('en')->title = $ar_to_en->translate(trim($row['name']));
 			$product->save();
 
-            // if (!empty($product)) {
-			// 	// create translation using package Astrotomic/laravel-translatable
-            //     foreach ($this->lang as $lang) {
-            //         $product->translateOrNew($lang['code'])->title = trim($request->get('title_' . $lang['code']));
-            //         $product->translateOrNew($lang['code'])->description = trim($request->get('description_' . $lang['code']));
-            //         $product->save();
-            //     }
-            // }
-
         }
 
 
