@@ -13,9 +13,8 @@ class ViewProductController extends Controller
 
     public function index()
     {
-
             $products = Product::all();
-           return datatables()->of($products)
+            return datatables()->of($products)
             ->addIndexColumn()
             ->make(true);
                 // ->addColumn('action', function ($row) {

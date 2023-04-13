@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 use Maatwebsite\Excel\Validators\Failure;
 
 
@@ -37,6 +38,9 @@ WithChunkReading
     public function model(array $row )
     {
 
+
+        $ar_to_en = new GoogleTranslate('en', 'ar');
+        $en_to_ar = new GoogleTranslate('ar', 'en');
 
         $data = Product::where('product_number',$row['number'])->where('merchant_id',$this->merchant)->first();
         if($data){
@@ -75,7 +79,8 @@ WithChunkReading
 			$product->product_descount = trim($row['discount']);
 			$product->price = trim($row['price']);
             $product->translateOrNew('ar')->title = trim($row['name']);
-            $product->translateOrNew('en')->title = trim($row['name']);
+            // $product->translateOrNew('ar')->title = $en_to_ar->translate(trim($row['name']));
+            $product->translateOrNew('en')->title = $ar_to_en->translate(trim($row['name']));
 			$product->save();
 
             // if (!empty($product)) {
@@ -86,14 +91,7 @@ WithChunkReading
             //         $product->save();
             //     }
             // }
-            // return new Product([
-            //     'product_number' => trim($row['number']),
-            //     //product name is a translated field and translated name exists on other table please review DB structure.
-            //     'product_name' => trim($row['name']),
-            //     'product_descount' =>  trim($row['discount']),
-            //     'price' => trim($row['price']),
-            //     'merchant_id' =>$this->merchant,
-            // ]);
+
         }
 
 
