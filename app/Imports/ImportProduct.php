@@ -29,6 +29,7 @@ WithChunkReading
     * @return \Illuminate\Database\Eloquent\Model|null
     */
     public $merchant;
+    public $lang=['en' , 'ar'];
     public function  __construct( $merchant)
     {
         $this->merchant = $merchant;
@@ -66,15 +67,33 @@ WithChunkReading
 
 
 			*/
+            $product = new Product();
+			$product->product_number = trim($row['number']);
+			$product->is_active = 0;
+			$product->is_featuer = 0;
+			$product->merchant_id = $this->merchant;
+			$product->product_descount = trim($row['discount']);
+			$product->price = trim($row['price']);
+            $product->translateOrNew('ar')->title = trim($row['name']);
+            $product->translateOrNew('en')->title = trim($row['name']);
+			$product->save();
 
-            return new Product([
-                'product_number' => trim($row['number']),
-                //product name is a translated field and translated name exists on other table please review DB structure.
-                'product_name' => trim($row['name']),
-                'product_descount' =>  trim($row['discount']),
-                'price' => trim($row['price']),
-                'merchant_id' =>$this->merchant,
-            ]);
+            // if (!empty($product)) {
+			// 	// create translation using package Astrotomic/laravel-translatable
+            //     foreach ($this->lang as $lang) {
+            //         $product->translateOrNew($lang['code'])->title = trim($request->get('title_' . $lang['code']));
+            //         $product->translateOrNew($lang['code'])->description = trim($request->get('description_' . $lang['code']));
+            //         $product->save();
+            //     }
+            // }
+            // return new Product([
+            //     'product_number' => trim($row['number']),
+            //     //product name is a translated field and translated name exists on other table please review DB structure.
+            //     'product_name' => trim($row['name']),
+            //     'product_descount' =>  trim($row['discount']),
+            //     'price' => trim($row['price']),
+            //     'merchant_id' =>$this->merchant,
+            // ]);
         }
 
 

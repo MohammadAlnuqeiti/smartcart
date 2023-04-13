@@ -38,28 +38,32 @@
   text-align: center;
 }
 </style>
+
 @endsection
+
 @section('content')
 <div style="width: 100%">
 
     <h1>All Products</h1>
     <!-- please use https://datatables.net/ to view tables -->
     <table id="myTable" class="table">
+
         <thead>
 
-        <tr>
-          <th>Product Number</th>
-          <th>Product Name</th>
-          <th>Product Discount</th>
-          <th>Product Price</th>
-        </tr>
-    </thead>
-
+            <tr>
+                <th>Product Number</th>
+                <th>Product Name</th>
+                <th>Product Discount</th>
+                <th>Product Price</th>
+            </tr>
+        </thead>
 
       </table>
+
 </div>
 
 @endsection
+
 @section('script')
 
 {{-- cdn jquery --}}
@@ -76,7 +80,7 @@
         ajax: "{{ Route('Allproducts') }}",
         columns: [
                  {data: 'product_number', name: 'product_number'},
-                 { data: 'product_name', name: 'product_name' },
+                 { data: 'title', name: 'title' },
                  { data: 'product_descount', name: 'product_descount' },
                  { data: 'price', name: 'price' }
                 //  ,

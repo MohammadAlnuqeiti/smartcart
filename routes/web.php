@@ -20,8 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/products', function () {
-    $products = Product::all();
-    return view('products',['products'=> $products]);
+    return view('products');
 })->name('products');
 
 Route::get('/file-import',[ProductController::class,'importView'])->name('import-view');

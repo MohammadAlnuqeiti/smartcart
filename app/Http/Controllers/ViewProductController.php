@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use \Yajra\Datatables\Datatables;
 
 class ViewProductController extends Controller
@@ -12,6 +13,7 @@ class ViewProductController extends Controller
 
     public function index()
     {
+
             $products = Product::all();
            return datatables()->of($products)
             ->addIndexColumn()
