@@ -8,6 +8,8 @@
 
 @section('css')
 
+{{-- cdn css datatables --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 
 
 <style>
@@ -60,7 +62,9 @@
 @endsection
 @section('script')
 
+{{-- cdn jquery --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+{{-- cdn datatables --}}
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 

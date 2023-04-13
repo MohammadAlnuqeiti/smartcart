@@ -22,8 +22,7 @@ class ViewProductController extends Controller
                 //     return $html;
                 // })->toJson();
 
-// dd($allProducts);
-        // return view('products');
+
     }
 
     // public function store(Request $request)
